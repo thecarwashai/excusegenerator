@@ -1,18 +1,58 @@
 import random
 import streamlit as st
 
+# -----------------------------
+# Page config
+# -----------------------------
 st.set_page_config(
     page_title="Excuse Generator",
     page_icon="🙃",
     layout="centered"
 )
 
+# -----------------------------
+# FORCE LIGHT MODE STYLES
+# -----------------------------
+st.markdown(
+    """
+    <style>
+    html, body, [data-testid="stApp"] {
+        background-color: #ffffff !important;
+        color: #000000 !important;
+    }
+
+    /* Remove dark mode overrides */
+    * {
+        color: #000000 !important;
+    }
+
+    /* Button styling */
+    button[kind="primary"], button {
+        background-color: #ff7a18 !important;
+        color: #ffffff !important;
+        border-radius: 10px !important;
+        border: none !important;
+        font-size: 16px !important;
+    }
+
+    button:hover {
+        background-color: #e96b0f !important;
+        color: #ffffff !important;
+    }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
+
+# -----------------------------
+# App Header
+# -----------------------------
 st.title("🙃 Excuse Generator")
 st.caption("For when honesty feels… aggressive.")
 
-# --------------------------------
-# 120 HUMOR-FIRST EXCUSES
-# --------------------------------
+# -----------------------------
+# Humor-first excuses (120+)
+# -----------------------------
 EXCUSES = [
     "Sorry for the late reply — my brain put this message in airplane mode.",
     "I meant to reply earlier but accidentally stared at the wall for 20 minutes.",
@@ -81,7 +121,7 @@ EXCUSES = [
     "I was briefly offline to avoid my responsibilities.",
     "I got distracted by the idea of becoming a better person.",
     "I forgot to reply because time is a suggestion.",
-    "I was stuck in a ‘do I reply now or later’ paralysis.",
+    "I was stuck in ‘do I reply now or later’ paralysis.",
     "I was busy overthinking the word ‘hey.’",
     "I delayed my response to seem mysterious. I overshot it.",
     "I had my phone. I lacked discipline.",
@@ -118,24 +158,29 @@ EXCUSES = [
     "I forgot to respond because time is fake.",
 ]
 
-# --------------------------------
-# UI
-# --------------------------------
+# -----------------------------
+# State
+# -----------------------------
 if "current_excuse" not in st.session_state:
     st.session_state.current_excuse = "Click the button."
 
 def generate_excuse():
     st.session_state.current_excuse = random.choice(EXCUSES)
 
+# -----------------------------
+# Excuse Card
+# -----------------------------
 st.markdown(
     f"""
     <div style="
         font-size:18px;
-        padding:20px;
-        background:#fff;
-        border-radius:12px;
-        box-shadow:0 6px 20px rgba(0,0,0,0.08);
-        margin-bottom:15px;">
+        padding:22px;
+        background-color:#ffffff;
+        color:#000000;
+        border-radius:14px;
+        box-shadow:0 6px 20px rgba(0,0,0,0.1);
+        margin-bottom:16px;
+        font-weight:500;">
         {st.session_state.current_excuse}
     </div>
     """,
