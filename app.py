@@ -11,7 +11,7 @@ st.set_page_config(
 )
 
 # -----------------------------
-# FORCE LIGHT MODE STYLES
+# Force white background + black text
 # -----------------------------
 st.markdown(
     """
@@ -20,24 +20,18 @@ st.markdown(
         background-color: #ffffff !important;
         color: #000000 !important;
     }
-
-    /* Remove dark mode overrides */
     * {
         color: #000000 !important;
     }
-
-    /* Button styling */
-    button[kind="primary"], button {
-        background-color: #ff7a18 !important;
+    button {
+        background-color: #111111 !important;
         color: #ffffff !important;
         border-radius: 10px !important;
         border: none !important;
         font-size: 16px !important;
     }
-
     button:hover {
-        background-color: #e96b0f !important;
-        color: #ffffff !important;
+        background-color: #333333 !important;
     }
     </style>
     """,
@@ -45,118 +39,206 @@ st.markdown(
 )
 
 # -----------------------------
-# App Header
+# Header
 # -----------------------------
 st.title("🙃 Excuse Generator")
-st.caption("For when honesty feels… aggressive.")
+st.caption("Pick a tone. Sound human. Or don’t.")
 
 # -----------------------------
-# Humor-first excuses (120+)
+# CASUAL (realistic)
 # -----------------------------
-EXCUSES = [
-    "Sorry for the late reply — my brain put this message in airplane mode.",
-    "I meant to reply earlier but accidentally stared at the wall for 20 minutes.",
-    "I opened your message, smiled, and immediately forgot how time works.",
-    "I was busy pretending I have my life together.",
-    "Sorry I’m late — I got stuck in a very intense internal monologue.",
-    "I replied in my head. Sadly, that version of me is unreliable.",
-    "I was about to text back and then my phone watched me fail.",
-    "I got distracted doing something extremely important (scrolling).",
-    "I was offline emotionally, spiritually, and technologically.",
-    "My phone was right next to me. I chose chaos instead.",
-    "I took a ‘quick break’ and woke up in a new personality.",
-    "I didn’t ghost — I lightly evaporated.",
-    "I was busy overthinking a response that did not need overthinking.",
-    "I started typing and then panicked about punctuation.",
-    "Sorry — my social battery went into low power mode.",
-    "I was busy convincing myself I’d reply ‘in a minute.’",
-    "I accidentally treated your message like a bookmark.",
-    "I got lost in the endless loop of ‘I’ll respond after this.’",
-    "I was doing nothing, but very intensely.",
-    "I was distracted by the idea of being productive.",
-    "I forgot to reply because I’m built different (badly).",
-    "I was buffering.",
-    "My brain said ‘reply later’ and never specified when.",
-    "I got emotionally sidetracked by snacks.",
-    "I was busy having a main character moment.",
-    "I replied mentally and expected technology to respect that.",
-    "I got trapped in a nap that had no exit strategy.",
-    "Sorry — I thought I replied. Confidence was high. Accuracy was low.",
-    "I was caught in a staring contest with my ceiling.",
-    "I was busy reorganizing my thoughts alphabetically.",
-    "I disappeared briefly to recharge my personality.",
-    "I got distracted trying to remember what I was distracted by.",
-    "I was on mute in real life.",
-    "I saw your text and then time fast-forwarded.",
-    "I didn’t ignore you — I underestimated myself.",
-    "I was emotionally unavailable to my own phone.",
-    "I accidentally opened 47 mental tabs.",
-    "I was busy overestimating my ability to multitask.",
-    "I had to consult my inner committee. They were unhelpful.",
-    "I got delayed by an unexpected vibe check.",
-    "I went to reply and fell into the ‘just one more scroll’ trap.",
-    "I was stuck choosing between being funny or being on time.",
-    "I had the intention. The execution escaped.",
-    "I was busy thinking of a clever excuse. Mission accomplished.",
-    "I vanished briefly to maintain mystery. Nailed it.",
-    "I was late because I thought I had time. I did not have time.",
-    "I got distracted by the concept of replying.",
-    "I was practicing self-care (avoiding responsibility).",
-    "I was lost in thought. It was poorly organized.",
-    "I got delayed by my own procrastination tutorial.",
-    "I tried to reply earlier but life said ‘no ❤️’.",
-    "I was busy having a staring contest with my phone.",
-    "I meant to respond sooner, but my motivation left the chat.",
-    "I was buffering socially.",
-    "I took a break that aggressively overstayed.",
-    "I was trapped in a loop of ‘I’ll respond after this song.’",
-    "I got distracted building a fake personality in my head.",
-    "I accidentally ghosted myself too.",
-    "I was temporarily unavailable due to vibes.",
-    "I got caught in traffic… mentally.",
-    "I forgot because I am, at my core, just a guy.",
-    "I was doing something important (thinking about nothing).",
-    "I replied late because I respect suspense.",
-    "I disappeared to preserve the mystery (and failed).",
-    "I was briefly offline to avoid my responsibilities.",
-    "I got distracted by the idea of becoming a better person.",
-    "I forgot to reply because time is a suggestion.",
-    "I was stuck in ‘do I reply now or later’ paralysis.",
-    "I was busy overthinking the word ‘hey.’",
-    "I delayed my response to seem mysterious. I overshot it.",
-    "I had my phone. I lacked discipline.",
-    "I went to reply and immediately forgot how conversations work.",
-    "I was practicing being low effort ironically.",
-    "I accidentally treated your message like a to-do item.",
-    "I was busy losing track of time professionally.",
-    "I got distracted by my own thoughts. They were loud.",
-    "I disappeared briefly to reset my personality settings.",
-    "I was unavailable due to poor time management.",
-    "I forgot to reply because my brain went into power-saving mode.",
-    "I was stuck choosing emojis.",
-    "I delayed my reply to avoid sounding eager. I failed spectacularly.",
-    "I got distracted trying to remember if I replied already.",
-    "I was busy doing absolutely nothing.",
-    "I accidentally opened Instagram and lost 30 minutes.",
-    "I was socially buffering.",
-    "I thought about replying, which is basically replying.",
-    "I got delayed by a surprise nap.",
-    "I vanished briefly to maintain balance in the universe.",
-    "I was busy ignoring my responsibilities — including replying.",
-    "I got distracted by my own reflection.",
-    "I forgot because my brain runs on trial software.",
-    "I was temporarily unavailable due to vibes and poor planning.",
-    "I went to reply and immediately lost confidence.",
-    "I delayed responding to keep things interesting. Oops.",
-    "I was stuck in analysis paralysis over punctuation.",
-    "I forgot to reply because I am not built for urgency.",
-    "I was busy existing.",
-    "I got distracted by literally anything else.",
-    "I was offline emotionally and my phone respected that.",
-    "I delayed replying because my brain needed a reboot.",
-    "I vanished briefly to reset my social skills.",
-    "I forgot to respond because time is fake.",
+CASUAL = [
+    "Sorry, just saw this.",
+    "My bad — long day.",
+    "Just catching up on texts.",
+    "Sorry, work got busy.",
+    "Just now seeing this.",
+    "My bad, I knocked out.",
+    "Was away from my phone for a bit.",
+    "Got distracted and forgot to respond.",
+    "Lost track of time earlier.",
+    "Today moved faster than expected.",
+    "Just resurfacing now.",
+    "Phone’s been ignored all day, my bad.",
+    "Long story short: busy day.",
+    "Just now sitting down.",
+    "Didn’t mean to disappear.",
+    "Finally checking my phone.",
+    "Today got away from me.",
+    "Catching up now.",
+    "Was running around most of the day.",
+    "Just got a second to breathe.",
+    "Sorry — hectic day.",
+    "Totally slipped my mind.",
+    "Just getting back to my phone.",
+    "Got pulled into a few things.",
+    "Busy stretch earlier.",
+    "Just seeing this now.",
+    "Long afternoon, my bad.",
+    "Didn’t mean to reply so late.",
+    "Work kind of took over.",
+    "Busy day but free now.",
+    "Just getting around to messages.",
+    "Lost track of time today.",
+    "Sorry — didn’t mean to lag.",
+    "Just finished up some stuff.",
+    "Phone was ignored earlier.",
+    "Just catching this.",
+    "Today was packed.",
+    "Got caught up with things.",
+    "Sorry — didn’t see this earlier.",
+    "Just got out of work mode.",
+    "Today flew by.",
+    "Got sidetracked earlier.",
+    "Just now checking messages.",
+    "Didn’t mean to leave you hanging.",
+    "Busy but here now.",
+    "Just resurfacing from today.",
+    "Sorry — phone was neglected.",
+    "Just wrapping things up.",
+    "Got tied up for a bit.",
+    "Just seeing your message.",
+    "Lost track of my phone.",
+    "Late reply, my bad.",
 ]
+
+# -----------------------------
+# FLIRTY (subtle, not cringe)
+# -----------------------------
+FLIRTY = [
+    "Worth the wait though 🙂",
+    "Okay hi — I’m back now.",
+    "Survived the day. What’d I miss?",
+    "Back from the chaos.",
+    "Late reply, same interest.",
+    "Okay, I’m here now.",
+    "Hi again 👋",
+    "I disappeared briefly — my bad.",
+    "Hope your day’s going well.",
+    "Alright, your turn.",
+    "Back online and behaving.",
+    "Made it through the day.",
+    "Delayed response, not delayed interest.",
+    "I owe you a reply and probably coffee.",
+    "Okay, catching up now.",
+    "Sorry — had to re-enter society.",
+    "Back from real life.",
+    "Worth circling back to this.",
+    "Late, but intentional.",
+    "Hi — survived the day.",
+    "Okay, I’m listening now.",
+    "Back from adulting.",
+    "Had to disappear briefly.",
+    "Alright, talk to me.",
+    "I’m better at this now.",
+    "Late reply, honest smile included.",
+    "Okay, back in the chat.",
+    "Hope today treated you well.",
+    "Sorry — life interrupted.",
+    "Back and curious.",
+    "Okay, what’d I miss?",
+    "Had to step away for a bit.",
+    "I’m here now, promise.",
+    "Delayed but present.",
+    "Back from the day.",
+    "Hi — long day.",
+    "Sorry, got pulled away.",
+    "Okay, caught up.",
+    "Late reply, still here.",
+    "Back from chaos mode.",
+    "Okay, your move.",
+]
+
+# -----------------------------
+# HONEST (direct + emotionally mature)
+# -----------------------------
+HONEST = [
+    "Honestly, I needed a break from my phone.",
+    "Today was heavier than expected.",
+    "Was in a weird headspace earlier.",
+    "Didn’t have the energy to reply before.",
+    "Needed some offline time.",
+    "Had a lot going on today.",
+    "I tend to disappear when I’m overwhelmed.",
+    "Just didn’t want to half-reply earlier.",
+    "I’m better at replying once the day slows down.",
+    "Took some quiet time today.",
+    "Was mentally checked out for a bit.",
+    "Trying to be more present now.",
+    "I’m not great at texting during busy days.",
+    "Needed to reset earlier.",
+    "I wanted to reply when I could focus.",
+    "Was dealing with a lot today.",
+    "Didn’t have much social energy earlier.",
+    "Just being honest — today drained me.",
+    "I’m more responsive in the evenings.",
+    "Thanks for the patience.",
+    "Today took more out of me than expected.",
+    "Needed to step away for a bit.",
+    "Had to unplug earlier.",
+    "I wasn’t in a great headspace earlier.",
+    "Trying to pace myself today.",
+    "Didn’t want to rush a response.",
+    "Needed some quiet time.",
+    "I’m not ignoring you.",
+    "Today was a lot.",
+    "Had to take care of some things.",
+    "Was prioritizing some offline stuff.",
+    "Just getting back into texts.",
+    "I reply better when I can be present.",
+    "Thanks for understanding.",
+    "Just being upfront.",
+]
+
+# -----------------------------
+# FUNNY / NOT REAL (clearly unserious)
+# -----------------------------
+FUNNY = [
+    "Sorry — I was fighting for my life (mentally).",
+    "I meant to reply but time simply refused.",
+    "I disappeared to preserve the mystery.",
+    "I replied in my head. Technology failed me.",
+    "I was busy doing nothing, aggressively.",
+    "Sorry — I was buffering.",
+    "I got distracted by absolutely everything.",
+    "I was unavailable due to vibes.",
+    "I accidentally took a nap with no exit plan.",
+    "I vanished briefly for character development.",
+    "I was caught in a staring contest with my ceiling.",
+    "I meant to reply sooner but forgot I exist.",
+    "Time slipped through my fingers dramatically.",
+    "I was trapped in the ‘just one more scroll’ loop.",
+    "I disappeared to reset my personality.",
+    "I was offline emotionally and spiritually.",
+    "I thought about replying, which counts, right?",
+    "I delayed replying for suspense.",
+    "I was busy pretending to be productive.",
+    "I disappeared for plot reasons.",
+    "I went to reply and immediately panicked.",
+    "I was busy overthinking punctuation.",
+    "I vanished briefly to recharge my vibe.",
+    "I got distracted by snacks.",
+    "I disappeared to maintain balance in the universe.",
+    "I was stuck in a nap dimension.",
+    "I was unavailable due to poor planning.",
+    "I meant to reply and then didn’t.",
+    "I was buffering socially.",
+    "I got distracted by my own thoughts.",
+    "I vanished briefly to avoid responsibility.",
+    "I was fighting autocorrect.",
+    "I delayed my reply artistically.",
+    "I disappeared and reappeared — classic me.",
+    "I forgot how conversations work.",
+]
+
+# -----------------------------
+# Tone selector
+# -----------------------------
+tone = st.radio(
+    "Select tone",
+    ["Casual", "Flirty", "Honest", "Funny / Not Real"],
+    horizontal=True
+)
 
 # -----------------------------
 # State
@@ -165,28 +247,47 @@ if "current_excuse" not in st.session_state:
     st.session_state.current_excuse = "Click the button."
 
 def generate_excuse():
-    st.session_state.current_excuse = random.choice(EXCUSES)
+    if tone == "Casual":
+        st.session_state.current_excuse = random.choice(CASUAL)
+    elif tone == "Flirty":
+        st.session_state.current_excuse = random.choice(FLIRTY)
+    elif tone == "Honest":
+        st.session_state.current_excuse = random.choice(HONEST)
+    else:
+        st.session_state.current_excuse = random.choice(FUNNY)
 
 # -----------------------------
-# Excuse Card
+# Excuse card
 # -----------------------------
 st.markdown(
     f"""
-    <div style="
+    <div id="excuse-box" style="
         font-size:18px;
         padding:22px;
         background-color:#ffffff;
         color:#000000;
         border-radius:14px;
         box-shadow:0 6px 20px rgba(0,0,0,0.1);
-        margin-bottom:16px;
-        font-weight:500;">
+        margin-bottom:16px;">
         {st.session_state.current_excuse}
     </div>
     """,
     unsafe_allow_html=True
 )
 
-st.button("Generate Excuse 🙃", on_click=generate_excuse)
+col1, col2 = st.columns([1, 1])
 
-st.caption("Use responsibly. Or irresponsibly. I’m not your manager.")
+with col1:
+    st.button("Generate Excuse 🙃", on_click=generate_excuse)
+
+with col2:
+    st.markdown(
+        f"""
+        <button onclick="navigator.clipboard.writeText(`{st.session_state.current_excuse}`)">
+            Copy 📋
+        </button>
+        """,
+        unsafe_allow_html=True
+)
+
+st.caption("Funny mode is jokes. Casual/Flirty/Honest are real texts.")
